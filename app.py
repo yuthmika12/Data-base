@@ -8,7 +8,7 @@ st.markdown("### Student Database Management")
 
 # --- 1. SPREADSHEET CONFIGURATION ---
 SHEET_URL = "https://docs.google.com/spreadsheets/d/1XVBjt8H38h12n6eZOe49CcvGx14g2zmcnnYtXHVNBD0/edit?gid=243763655#gid=243763655"
-CSV_URL = "https://docs.google.com/spreadsheets/d/1XVBjt8H38h12n6eZOe49CcvGx14g2zmcnnYtXHVNBD0/gviz/tq?tqx=out:csv&gid=243763655"
+CSV_URL = "https://docs.google.com/spreadsheets/d/1XVBjt8H38h12n6eZOe49CcvGx14g2zmcnnYtXHVNBD0/edit?usp=sharing"
 
 # --- 2. SIDEBAR MENU ---
 menu = ["Add New Member", "View All Members"]
@@ -47,7 +47,7 @@ if choice == "Add New Member":
                 # --- PROCESS SUCCESS ---
                 try:
                     st.success(f"🎉 Successfully registered {clean_name}!")
-                    st.balloons()
+                    
                     
                     # Manual rerun flag can clear data here ONLY on a fully successful submission if desired,
                     # otherwise leaving it keeps the text so you can review what you just sent.
