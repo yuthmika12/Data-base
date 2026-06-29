@@ -27,8 +27,8 @@ if choice == "Add New Member":
     
     with st.form("add_member_form", clear_on_submit=True):
         name = st.text_input("Student Name")
-        grade = st.selectbox("Grade", ["Grade 9", "Grade 10", "Grade 11", "Grade 12", "Grade 13"])
-        medium = st.text_input("Preferred Art Medium (e.g., Watercolors, Digital)")
+        grade = st.selectbox("Grade", ["Grade 2", "Grade 3", "Grade 4", "Grade 5", "Grade 6", "Grade 7", "Grade 8", "Grade 9", "Grade 10", "Grade 11", "Grade 12", "Grade 13"])
+        medium = st.text_input("Index Number")
         phone = st.text_input("Contact Number")
 
         submit_button = st.form_submit_button("Register Member")
