@@ -40,13 +40,13 @@ if choice == "Add New Member":
 
 # --- 4. VIEW ALL MEMBERS ---
 elif choice == "View All Members":
-    st.subheader("Current Art Circle Members (Live from Google Sheets)")
+    st.subheader("Current Art Circle Members")
     try:
         # Fetch data seamlessly from the spreadsheet
         df = pd.read_csv(csv_url)
         if not df.empty:
             st.dataframe(df, use_container_width=True)
         else:
-            st.info("The spreadsheet is currently empty!")
+            st.info("The list is currently empty!")
     except Exception as e:
         st.error(f"Could not read spreadsheet data. Make sure it is shared as 'Anyone with the link'. Error: {e}")
