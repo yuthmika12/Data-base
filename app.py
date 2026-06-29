@@ -8,7 +8,7 @@ st.markdown("### Student Database Management (Spreadsheet Cloud)")
 
 # --- 1. SPREADSHEET CONFIGURATION ---
 # Paste your copied Google Sheet URL inside the quotes below
-SHEET_URL = "PASTE_YOUR_GOOGLE_SHEET_URL_HERE"
+SHEET_URL = "https://docs.google.com/spreadsheets/d/1XVBjt8H38h12n6eZOe49CcvGx14g2zmcnnYtXHVNBD0/edit?gid=243763655#gid=243763655"
 
 # This converts the standard URL into a direct CSV export link
 if "docs.google.com" in SHEET_URL:
