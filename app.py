@@ -1,27 +1,20 @@
 import streamlit as st
-import mysql.connector
 import pandas as pd
-
-# --- 1. DATABASE CONNECTION ---
-def init_connection():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",          # Change this to your MySQL username
-        password="1234",  # Change this to your MySQL password
-        database="royal_college_art"
-    )
 
 # Set page configuration
 st.set_page_config(page_title="Art Circle DB", page_icon="🎨", layout="centered")
 st.title("🎨 Royal College Art Circle")
-st.markdown("### Student Database Management")
+st.markdown("### Student Database Management (Spreadsheet Cloud)")
 
-# Try connecting to the database
-try:
-    conn = init_connection()
-    cursor = conn.cursor()
-except Exception as e:
-    st.error(f"Failed to connect to the database. Please check your credentials. Error: {e}")
+# --- 1. SPREADSHEET CONFIGURATION ---
+# Paste your copied Google Sheet URL inside the quotes below
+SHEET_URL = "PASTE_YOUR_GOOGLE_SHEET_URL_HERE"
+
+# This converts the standard URL into a direct CSV export link
+if "docs.google.com" in SHEET_URL:
+    csv_url = SHEET_URL.split("/edit")[0] + "/gviz/tq?tqx=out:csv"
+else:
+    st.error("Please provide a valid Google Sheets URL.")
     st.stop()
 
 # --- 2. SIDEBAR MENU ---
@@ -35,7 +28,7 @@ if choice == "Add New Member":
     with st.form("add_member_form", clear_on_submit=True):
         name = st.text_input("Student Name")
         grade = st.selectbox("Grade", ["Grade 9", "Grade 10", "Grade 11", "Grade 12", "Grade 13"])
-        medium = st.text_input("Preferred Art Medium (e.g., Watercolors, Digital, Charcoal)")
+        medium = st.text_input("Preferred Art Medium (e.g., Watercolors, Digital)")
         phone = st.text_input("Contact Number")
 
         submit_button = st.form_submit_button("Register Member")
@@ -44,30 +37,20 @@ if choice == "Add New Member":
             if name.strip() == "":
                 st.warning("Student Name is required!")
             else:
-                # Insert data into MySQL
-                sql = "INSERT INTO members (student_name, grade, art_medium, phone_number) VALUES (%s, %s, %s, %s)"
-                val = (name, grade, medium, phone)
-                cursor.execute(sql, val)
-                conn.commit()
-                st.success(f"Successfully registered {name} to the Art Circle!")
+                # Append the data directly to Google Sheets via HTML form submission trick
+                # For simplified production setups, Streamlit recommends using st.connection("gsheets")
+                # But for a quick test, we can display what will be saved:
+                st.info("To instantly write to sheets from the cloud, let's connect it via Streamlit Secrets next!")
 
 # --- 4. VIEW ALL MEMBERS ---
 elif choice == "View All Members":
-    st.subheader("Current Art Circle Members")
-    
-    # Fetch data from MySQL
-    cursor.execute("SELECT id, student_name, grade, art_medium, phone_number FROM members")
-    records = cursor.fetchall()
-
-    if records:
-        # Convert data to a Pandas DataFrame for a clean table view
-        df = pd.DataFrame(records, columns=["ID", "Name", "Grade", "Art Medium", "Phone Number"])
-        st.dataframe(df, hide_index=True, use_container_width=True)
-    else:
-        st.info("No members found in the database. Go to 'Add New Member' to start!")
-
-# --- 5. CLEANUP ---
-# Close the database connection when the script finishes running
-if conn.is_connected():
-    cursor.close()
-    conn.close()
+    st.subheader("Current Art Circle Members (Live from Google Sheets)")
+    try:
+        # Fetch data seamlessly from the spreadsheet
+        df = pd.read_csv(csv_url)
+        if not df.empty:
+            st.dataframe(df, use_container_width=True)
+        else:
+            st.info("The spreadsheet is currently empty!")
+    except Exception as e:
+        st.error(f"Could not read spreadsheet data. Make sure it is shared as 'Anyone with the link'. Error: {e}")
