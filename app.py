@@ -8,7 +8,7 @@ st.markdown("### Student Database Management")
 
 # --- 1. SPREADSHEET CONFIGURATION ---
 SHEET_URL = "https://docs.google.com/spreadsheets/d/1XVBjt8H38h12n6eZOe49CcvGx14g2zmcnnYtXHVNBD0/edit?gid=243763655#gid=243763655"
-CSV_URL = "https://docs.google.com/spreadsheets/d/1XVBjt8H38h12n6eZOe49CcvGx14g2zmcnnYtXHVNBD0/edit?usp=sharing"
+CSV_URL = "https://docs.google.com/spreadsheets/d/1XVBjt8H38h12n6eZOe49CcvGx14g2zmcnnYtXHVNBD0/edit?pli=1&gid=243763655#gid=243763655"
 
 # --- 2. SIDEBAR MENU ---
 menu = ["Add New Member", "View All Members"]
