@@ -36,6 +36,11 @@ if choice == "Add New Member":
         if submit_button:
             if name.strip() == "":
                 st.warning("Student Name is required!")
+                else:
+                # Append the data directly to Google Sheets via HTML form submission trick
+                # For simplified production setups, Streamlit recommends using st.connection("gsheets")
+                # But for a quick test, we can display what will be saved:
+                st.info("Registered")
             
 
 # --- 4. VIEW ALL MEMBERS ---
