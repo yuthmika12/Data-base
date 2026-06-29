@@ -4,7 +4,7 @@ import pandas as pd
 # Set page configuration
 st.set_page_config(page_title="Art Circle DB", page_icon="🎨", layout="centered")
 st.title("🎨 Royal College Art Circle")
-st.markdown("### Student Database Management (Spreadsheet Cloud)")
+st.markdown("### Student Database Management")
 
 # --- 1. SPREADSHEET CONFIGURATION ---
 # Paste your copied Google Sheet URL inside the quotes below
@@ -36,11 +36,7 @@ if choice == "Add New Member":
         if submit_button:
             if name.strip() == "":
                 st.warning("Student Name is required!")
-            else:
-                # Append the data directly to Google Sheets via HTML form submission trick
-                # For simplified production setups, Streamlit recommends using st.connection("gsheets")
-                # But for a quick test, we can display what will be saved:
-                st.info("To instantly write to sheets from the cloud, let's connect it via Streamlit Secrets next!")
+            
 
 # --- 4. VIEW ALL MEMBERS ---
 elif choice == "View All Members":
