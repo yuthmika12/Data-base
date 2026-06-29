@@ -4,7 +4,7 @@ import requests
 
 # Set page configuration
 st.set_page_config(page_title="Art Circle DB", page_icon="🎨", layout="centered")
-st.title("🎨 Royal College Art Circle")
+st.title("🎨 Art Circle")
 st.markdown("### Student Database Management")
 
 # --- 1. SPREADSHEET CONFIGURATION ---
